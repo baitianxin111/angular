@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<div ng-controller="controller"></div>
+<script>
+//    方式一的get方式
+//    var request = new XMLHttpRequest();
+//    //    get方式是明文的方式
+//    request.open("GET","http://localhost:3100/user/register?name==小明&pw=111");
+//
+//    request.onload = function () {
+//        console.log( request.response)   ;
+//    }
+//    //  将前台数据发送到后台
+//    request.send();
+//<!--方式一的发送POST方式-->
+//    var request = new XMLHttpRequest();
+//    request.open("POST","http://localhost:50282/user/register");
+//    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+//    request.onload = function () {
+//    console.log(request.response)
+//    }
+////    发送到html页面的
+//    request.send("name=aaaaa");
+//方式二的方法
+    angular.module("app",[])
+            .controller("controller",function ($http,$httpParamSerializerJQLike) {
+                $http( {
+                    method:"POST",
+                    url:"http://localhost:50282/user/register",
+                    data:$httpParamSerializerJQLike({name:"1234"}),
+                    headers:{
+                        "content-type":"application/x-www-form-urlencoded"
+                    }
+                });
+            });
+</script>
+</body>
+</html>
